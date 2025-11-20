@@ -3,201 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Pertanyaan & Jawaban</title>
+    <title>Q&A Knowledge Base</title>
+    <meta name="description" content="Knowledge base for Q&A questions and answers">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 2rem;
-            color: #333;
-        }
-
-        .container {
+            font-family: Arial, sans-serif;
+            padding: 20px;
             max-width: 900px;
             margin: 0 auto;
+            line-height: 1.8;
+            color: #333;
         }
-
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            margin-bottom: 2rem;
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
         }
-
-        .header h1 {
-            font-size: 2.5rem;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+        article {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
         }
-
-        .header p {
-            font-size: 1.1rem;
-            color: #666;
+        h2 {
+            color: #0066cc;
+            font-size: 1.1em;
+            margin-bottom: 10px;
         }
-
-        .faq-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
+        .question {
+            font-weight: bold;
+            margin-bottom: 8px;
         }
-
-        .faq-item {
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 1.5rem;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .faq-question {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-
-        .faq-question::before {
-            content: "❓";
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .faq-answer {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.6;
-            padding-left: 2.25rem;
+        .answer {
+            margin-top: 8px;
             white-space: pre-line;
-        }
-
-        .faq-answer::before {
-            content: "💡";
-            margin-right: 0.5rem;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 2rem;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .faq-container {
-                padding: 1.5rem;
-            }
-
-            .faq-question {
-                font-size: 1.1rem;
-            }
-
-            .faq-answer {
-                padding-left: 0;
-            }
-
-            .faq-answer::before {
-                display: block;
-                margin-bottom: 0.5rem;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>❓ FAQ</h1>
-            <p>Pertanyaan & Jawaban Umum</p>
-        </div>
-
-        <div class="faq-container" id="faq-container">
-            <p>Memuat data...</p>
-        </div>
-
-        <div class="footer">
-            <p>&copy; 2024 Solusi. Powered by Copilot Studio.</p>
-        </div>
-    </div>
+    <header>
+        <h1>Knowledge Base - Questions and Answers</h1>
+    </header>
+    
+    <main id="content">
+        <p>Loading knowledge base...</p>
+    </main>
 
     <script>
-        // Load and display Q&A from JSON
-        async function loadQA() {
-            try {
-                const response = await fetch('qa.json');
-                const data = await response.json();
+        fetch('qa.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('content');
+                let html = '';
                 
-                const faqContainer = document.getElementById('faq-container');
-                faqContainer.innerHTML = '';
-
                 if (data.qna && data.qna.body && Array.isArray(data.qna.body)) {
                     data.qna.body.forEach((item, index) => {
-                        const faqItem = document.createElement('div');
-                        faqItem.className = 'faq-item';
-                        faqItem.style.animationDelay = `${index * 0.1}s`;
-                        
-                        faqItem.innerHTML = `
-                            <div class="faq-question">${escapeHtml(item.question)}</div>
-                            <div class="faq-answer">${escapeHtml(item.answer)}</div>
+                        html += `
+                            <article itemscope itemtype="https://schema.org/FAQPage">
+                                <div itemscope itemtype="https://schema.org/Question">
+                                    <h2 class="question" itemprop="name">${escapeHtml(item.question)}</h2>
+                                    <div itemscope itemtype="https://schema.org/Answer">
+                                        <div class="answer" itemprop="text">${escapeHtml(item.answer)}</div>
+                                    </div>
+                                </div>
+                            </article>
                         `;
-                        
-                        faqContainer.appendChild(faqItem);
                     });
                 } else {
-                    faqContainer.innerHTML = '<p>Tidak ada data Q&A yang ditemukan.</p>';
+                    html = '<p>No Q&A data found.</p>';
                 }
-            } catch (error) {
-                console.error('Error loading Q&A:', error);
-                document.getElementById('faq-container').innerHTML = 
-                    '<p style="color: #dc3545;">Gagal memuat data Q&A. Pastikan file qa.json ada dan dapat diakses.</p>';
-            }
-        }
+                
+                container.innerHTML = html;
+            })
+            .catch(error => {
+                document.getElementById('content').innerHTML = '<p>Error loading knowledge base data.</p>';
+                console.error('Error:', error);
+            });
 
-        // Escape HTML to prevent XSS
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
-
-        // Load Q&A when page loads
-        document.addEventListener('DOMContentLoaded', loadQA);
     </script>
 </body>
 </html>
