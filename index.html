@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copilot Chatbot</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -12,28 +16,42 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at top, #7f8ff4, #6472c9 55%, #4b5aa8);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(160deg, #0d0d0d, #1a1a1a, #2b0000);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             color: #fff;
         }
 
+        header {
+            display: flex;
+            justify-content: center;
+            padding: 1.8rem 0 0.5rem;
+        }
+
+        header img {
+            height: 78px;
+            filter: drop-shadow(0 0 6px rgba(255,0,0,0.4));
+        }
+
         .hero {
             text-align: center;
-            padding: 3rem 1rem 1rem;
+            padding: 1rem 1rem 0.5rem;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.7rem;
+            font-weight: 700;
+            color: #ff2a2a;
+            text-shadow: 0 0 10px rgba(255,0,0,0.4);
         }
 
         .hero p {
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0.5rem auto 0;
+            max-width: 680px;
+            margin: 0.6rem auto 0;
+            font-weight: 300;
         }
 
         .chat-wrapper {
@@ -41,51 +59,63 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1.5rem;
+            padding: 1.6rem;
         }
 
         .chat-card {
             width: min(1100px, 100%);
             height: min(780px, 75vh);
-            background: rgba(255,255,255,0.08);
-            border-radius: 24px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            background: rgba(0,0,0,0.55);
+            border-radius: 20px;
+            border: 2px solid rgba(255,0,0,0.35);
+            box-shadow: 0 0 25px rgba(255,0,0,0.35);
             overflow: hidden;
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.2);
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            font-family: 'Poppins', sans-serif !important;
         }
 
         footer {
             text-align: center;
-            padding: 1.5rem 0;
+            padding: 1.3rem 0;
             font-size: 0.85rem;
             opacity: 0.75;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.1rem;
             }
-
+            header img {
+                height: 62px;
+            }
             .chat-card {
-                height: 75vh;
-                border-radius: 18px;
+                height: 73vh;
+                border-radius: 14px;
             }
         }
     </style>
 </head>
+
 <body>
+
+    <!-- Logo -->
+    <header>
+        <img src="logo.png" alt="Logo">
+    </header>
+
+    <!-- Title + Subtitle -->
     <section class="hero">
         <h1>Copilot Chatbot</h1>
-        <p>Mulai percakapan Anda dengan Copilot. Tanyakan pertanyaan, dapatkan solusi, dan temukan jawaban secara instan.</p>
+        <p>Tanyakan apa pun – chatbot ini akan memberikan jawaban cepat, akurat, dan responsif berdasarkan pengetahuan organisasi Anda.</p>
     </section>
 
+    <!-- Chat Embed -->
     <section class="chat-wrapper">
         <div class="chat-card">
             <iframe 
@@ -95,8 +125,10 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        &copy; 2024 Copilot Chatbot. Embedded Microsoft Copilot Studio experience.
+        © 2024 Copilot Chatbot • Powered by Microsoft Copilot Studio
     </footer>
+
 </body>
 </html>
